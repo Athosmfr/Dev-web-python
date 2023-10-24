@@ -1,0 +1,14 @@
+{% extends "main.html" %}
+
+{% block titulo %} HomePage {% endblock %}
+
+
+{% block body %}
+    {% for i in range(0, 5): %} <!-- codigo python -->
+    <h1> {{ texto }} </h1>
+    {% endfor %}
+
+    <a href="{{url_for('profile', user_id='Joel')}}">Perfil do Joel</a>
+    <a href="{{url_for('profile', user_id='Ana')}}">Perfil da Ana</a>
+    <a href="{{url_for('profile', user_id='Batima Fernardes')}}">Perfil da Batima Fernardes</a>
+{% endblock %}
