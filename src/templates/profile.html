@@ -1,26 +1,33 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user }} Profile</title>
-</head>
-<body>
-    <h1>Fala {{ user }}!</h1>
-    <a href="{{url_for('homepage')}}">HOME</a>
-    <a href="{{url_for('profile', user_id='Joel')}}">Perfil do Joel</a>
-    <a href="{{url_for('profile', user_id='Ana')}}">Perfil da Ana</a>
-    <a href="{{url_for('profile', user_id='Batima Fernardes')}}">Perfil da Batima Fernardes</a>
-</body>
-</html> -->
-
 {% extends "main.html" %}
 
 {% block titulo %} Perfil do {{ user }} {% endblock %}
 
 {% block body %}
 
-    <h1>Fala {{ user }}!</h1>
+    <h1>Fala {{ user.username }}!</h1>
     <a href="{{url_for('homepage')}}">HOME</a>
+
+    {% if form  %}
+        <h2> MEU PERFIL </h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+
+            {{ form.text.label() }}
+            {{ form.text() }}
+
+            {{ form.photo.label() }}
+            {{ form.photo() }}
+
+            {{ form.btn() }}
+        </form>
+
+    {% endif %}
+
+     {% for post in user.posts %}
+        <p>{{ post.post_text }}</p>
+        <!-- <img src="{{ url_for('static', filename='fotos_dos_posts/default.jpg') }}"> -->
+        <img class="img-thumbnail rounded" src="{{ url_for('static', filename='photos_posts/{}'.format(post.post_img)) }}">
+    {% endfor %}
 
 {% endblock %}

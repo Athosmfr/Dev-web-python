@@ -8,7 +8,22 @@
     <h1> {{ texto }} </h1>
     {% endfor %}
 
-    <a href="{{url_for('profile', user_id='Joel')}}">Perfil do Joel</a>
-    <a href="{{url_for('profile', user_id='Ana')}}">Perfil da Ana</a>
-    <a href="{{url_for('profile', user_id='Batima Fernardes')}}">Perfil da Batima Fernardes</a>
+    {% block formulario %}
+    <form method="POST">
+        {{ form.csrf_token }}
+
+        {{ form.email.label() }}
+        {{ form.email() }}
+
+        {{ form.password.label() }}
+        {{ form.password() }}
+
+        {{ form.btn() }}
+    </form>
+    {% endblock %}
+
+    {% includes "navbar.html" %}
+<!--    <a href="{{url_for('profile', user_id='Joel')}}">Perfil do Joel</a>-->
+<!--    <a href="{{url_for('profile', user_id='Ana')}}">Perfil da Ana</a>-->
+<!--    <a href="{{url_for('profile', user_id='Batima Fernardes')}}">Perfil da Batima Fernardes</a>-->
 {% endblock %}
