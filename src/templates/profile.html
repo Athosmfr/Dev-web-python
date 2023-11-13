@@ -42,10 +42,17 @@
 
         <p style="text-align: center">Contagem de Posts: {{ post_count }}</p>
 
-        <form class="logout" method="POST" action="{{ url_for('logout') }}">
-            {{ form.csrf_token }}
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+<!--        <form class="logout" method="POST" action="{{ url_for('logout') }}">-->
+<!--            {{ form.csrf_token }}-->
+<!--            <button type="submit" class="btn btn-danger">Logout</button>-->
+<!--        </form>-->
+        {% if current_user.id == user.id %}
+            <!-- Mostra o botão de logout apenas se o usuário está visualizando o próprio perfil -->
+            <form class="logout" method="POST" action="{{ url_for('logout') }}">
+                {{ form.csrf_token }}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        {% endif %}
 
     </div>
 

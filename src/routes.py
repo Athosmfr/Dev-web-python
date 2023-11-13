@@ -128,17 +128,17 @@ def profile(user_id):  # , batata):
         return render_template('profile.html', user=user_id, form=None)  # , mesa=batata)
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST']) # Rota POST para deslogar usuario
 def logout():
-    logout_user()
-    return redirect(url_for('homepage'))
+    logout_user() # Função fornecida pelo Flask Login para fazer logout do usuario.
+    return redirect(url_for('login')) # Retorna para homepage
 
-@app.route('/like/<int:post_id>', methods=['POST'])
-@login_required
-def like(post_id):
-    post = Posts.query.get(post_id)
-    if post:
-        like = Like.query.filter_by(user_id=current_user.id, post_id=post.id).first()
+@app.route('/like/<int:post_id>', methods=['POST']) # Rota estabelecida para dar like em um post (recebendo seu id) e fazendo req POST
+@login_required # Usuario deve estar logado para poder dar like!
+def like(post_id): # Passando o id do post que quer dar like
+    post = Posts.query.get(post_id) # Pegando o Post do banco.
+    if post: # Checa se o post existe, caso exista continua...
+        like = Like.query.filter_by(user_id=current_user.id, post_id=post.id).first() # Verifica se o usuario ja deu like
         if like:
             # O usuário já deu like, então remova o like
             database.session.delete(like)
@@ -149,21 +149,21 @@ def like(post_id):
             database.session.add(new_like)
             database.session.commit()
 
-            # Retorna um JSON indicando o status da operação
+            # Retorna para a HomePage.
     return redirect(url_for('homepage'))
 
 
-@app.route('/delete_post/<int:post_id>', methods=['POST'])
-@login_required
-def delete_post(post_id):
-    post = Posts.query.get_or_404(post_id)
+@app.route('/delete_post/<int:post_id>', methods=['POST']) # Rota para realizar o 'POST' de deletar um 'post'
+@login_required # Necessario usuario estar logado
+def delete_post(post_id):   # Função passando o id do post que quer deletar
+    post = Posts.query.get_or_404(post_id)  # Achando o post ou retornando erro.
 
     # Verifique se o usuário atual é o criador do post
     if current_user.id == post.user_id:
-        database.session.delete(post)
-        database.session.commit()
-        flash('Post excluído com sucesso!', 'success')
+        database.session.delete(post)   # Deletando do banco de dados
+        database.session.commit()   # Commitando a mudança
+        flash('Post excluído com sucesso!', 'success') # Utilizando flash para mostrar mensagem de sucesso no delete
     else:
         flash('Você não tem permissão para excluir este post.', 'danger')
 
-    return redirect(url_for('profile', user_id=current_user.id))
+    return redirect(url_for('profile', user_id=current_user.id)) # Redireciona para a pagina de perfil do usuario.
