@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alinhamento vertical dos itens da barra de navegação */
+    background-color: #333; /* Cor de fundo da barra de navegação */
+    padding: 10px 20px; /* Preenchimento interno da barra de navegação */
+    color: #fff; /* Cor do texto na barra de navegação */
+}
+
+/* Estilo para o logo */
+.navbar-logo a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px; /* Tamanho da fonte do logo */
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+/* Estilo para os links na barra de navegação */
+.navbar-links {
+    list-style: none;
+    display: flex;
+    align-items: center; /* Alinhamento vertical dos links na barra de navegação */
+}
+
+.navbar-links li {
+    margin-right: 40px; /* Espaçamento entre os itens da barra de navegação */
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 18px; /* Tamanho da fonte dos links na barra de navegação */
+}
+
+/* Estilo para o ícone do Material Symbols Outlined */
+.material-symbols-outlined {
+    font-size: 24px; /* Tamanho do ícone */
+    margin-right: 5px; /* Espaçamento entre o ícone e o texto do link */
+}

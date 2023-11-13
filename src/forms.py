@@ -26,7 +26,8 @@ class FormCreateNewAccount(FlaskForm):
 
 
 class FormCreateNewPost(FlaskForm):
-        text = StringField('PostText', widget=TextArea(), validators=[DataRequired()])
-        photo = FileField('Photo', validators=[DataRequired()])
-        btn = SubmitField('Publish')
-
+        text = StringField('Publicação', widget=TextArea(), validators=[DataRequired()])
+        photo = FileField('Imagem', validators=[DataRequired()])
+        btn = SubmitField('Publicar')
+class LikeForm(FlaskForm):
+    like = SubmitField('Like')

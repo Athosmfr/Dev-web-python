@@ -24,3 +24,16 @@ class Posts(database.Model):
     post_img = database.Column(database.String, default='default.png')
     creation_date = database.Column(database.DateTime, nullable=False, default=datetime.utcnow())
     user_id = database.Column(database.Integer, database.ForeignKey('user.id'), nullable=False)
+
+    def user_likes(self, user):
+        """
+        Verifica se o usuário deu like neste post.
+        """
+        like = Like.query.filter_by(user_id=user.id, post_id=self.id).first()
+        return like is not None
+
+class Like(database.Model):
+    __table_args__ = {'extend_existing': True}
+    id = database.Column(database.Integer, primary_key=True)
+    user_id = database.Column(database.Integer, database.ForeignKey('user.id'), nullable=False)
+    post_id = database.Column(database.Integer, database.ForeignKey('posts.id'), nullable=False)
