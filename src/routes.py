@@ -125,7 +125,8 @@ def profile(user_id):  # , batata):
         return render_template('profile.html', user=current_user, form=_formCreateNewPost, post_count=post_count, format_post_date=format_post_date)
     else:
         _user = User.query.get(int(user_id))
-        return render_template('profile.html', user=user_id, form=None)  # , mesa=batata)
+        post_count = Posts.query.filter_by(user_id=_user.id).count()
+        return render_template('profile.html', user=_user, form=None, post_count=post_count)  # , mesa=batata)
 
 
 @app.route('/logout', methods=['POST']) # Rota POST para deslogar usuario

@@ -48,7 +48,8 @@ body {
     padding: 20px;
     margin: 20px;
     text-align: center;
-    width: 300px;
+    width: fit-content;
+    height: fit-content;
     box-sizing: border-box;
 }
 
@@ -57,7 +58,7 @@ body {
 }
 
 .post img {
-    max-width: 100%;
+    width: 400px;
     height: auto;
     margin-bottom: 10px;
 }

@@ -13,11 +13,11 @@ class FormLogin(FlaskForm):
 
 
 class FormCreateNewAccount(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(6, 25)])
-    checkPassword = PasswordField('Check Password', validators=[DataRequired(), Length(6, 25), EqualTo('password')])
-    btn = SubmitField('Create Account')
+    email = StringField('E-mail', validators=[DataRequired(), Email()])
+    username = StringField('Nome de Usuário', validators=[DataRequired()])
+    password = PasswordField('Senha', validators=[DataRequired(), Length(6, 25)])
+    checkPassword = PasswordField('Confirme sua Senha', validators=[DataRequired(), Length(6, 25), EqualTo('password')])
+    btn = SubmitField('Criar Conta')
 
     def validate_email(self, email):
         email_of_user = User.query.filter_by(email=email.data).first()
